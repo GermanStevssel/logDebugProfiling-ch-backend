@@ -92,6 +92,13 @@ app.use("/api/carrito", cartRouter);
 app.use("/info", infoRouter);
 app.use("/api/randoms", randomRouter);
 app.use("/", webRouter);
+app.get("*", (req, res) => {
+	logger.log("warn", `ruta inexistente`);
+	res.status(404).json({
+		error: -2,
+		description: `ruta ${req.originalUrl} método get no implementado`,
+	});
+});
 
 const numCPUs = os.cpus().length;
 
